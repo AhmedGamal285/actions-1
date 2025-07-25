@@ -43,8 +43,10 @@ jobs:
             
     
     deploy_job:
-        runs-on: ubuntu-latest
-        timeout-minutes: 1
+        strategy:
+          matrix:
+            os: [ubuntu-latest, windows-latest]
+        runs-on: ${{ matrix.os }}
         concurrency: 
           group: production-deployment
           cancel-in-progress: true
@@ -59,7 +61,6 @@ jobs:
               timeout-minutes: 1
               run: |
                 cat dragon.txt
-                sleep 600
             
             - name: Deploy
               run: echo "Deploying ......."
