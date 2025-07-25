@@ -43,6 +43,7 @@ jobs:
     
     deploy_job:
         runs-on: ubuntu-latest
+        timeout-minutes: 1
         concurrency: 
           group: production-deployment
           cancel-in-progress: true
@@ -54,6 +55,7 @@ jobs:
                   name: dragon-file
                   
             - name: Read File
+              timeout-minutes: 1
               run: |
                 cat dragon.txt
                 sleep 600
