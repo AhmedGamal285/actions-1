@@ -1,12 +1,13 @@
 name: Generate ASCII Artwork
 
 on:
-    workflow_dispatch:
+  workflow_dispatch:
         
     # schedule:
     #   - cron: "*/1 * * * *"
   #  push
 
+concurrency:
 jobs:
     build_job:
         runs-on: ubuntu-latest
@@ -43,6 +44,9 @@ jobs:
     
     deploy_job:
         runs-on: ubuntu-latest
+        concurrency: 
+          group: production-deployment
+          cancel-in-progress: true
         needs: [test_job,build_job]
         steps:
             - name: Download Dragon File
@@ -51,7 +55,9 @@ jobs:
                   name: dragon-file
                   
             - name: Read File
-              run: cat dragon.txt
+              run: |
+                cat dragon.txt
+                sleep 600
             
             - name: Deploy
               run: echo "Deploying ......."
