@@ -7,7 +7,6 @@ on:
     #   - cron: "*/1 * * * *"
   #  push
 
-concurrency:
 jobs:
     build_job:
         runs-on: ubuntu-latest
