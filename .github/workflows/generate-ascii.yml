@@ -46,6 +46,10 @@ jobs:
         strategy:
           matrix:
             os: [ubuntu-latest, windows-latest]
+            exclude:
+              - os: windows-latest
+            include:
+              - os: windows-2022
         runs-on: ${{ matrix.os }}
         concurrency: 
           group: production-deployment
