@@ -43,7 +43,7 @@ jobs:
             
     
     deploy:
-        if: github.ref == 'refs/heads/main'
+        if: ${{ success() && github.head_ref == 'refs/heads/main' }}
         strategy:
           fail-fast: false
           max-parallel: 2
