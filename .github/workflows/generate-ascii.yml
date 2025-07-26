@@ -55,7 +55,7 @@ jobs:
         runs-on: ${{ matrix.os }}
         concurrency: 
           group: production-deployment
-          cancel-in-progress: true
+          # cancel-in-progress: true
         needs: [test_job,build_job]
         steps:
             - name: Download Dragon File
